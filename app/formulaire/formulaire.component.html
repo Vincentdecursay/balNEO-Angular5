@@ -1,0 +1,264 @@
+<fieldset>
+  <legend>policier</legend>
+  <div *ngFor="let policier of policiers ; index as i">
+    <p>Policier {{ i + 1 }}<br />
+      Nom: {{policier.nom}} <br />
+      Prénom: {{policier.prenom}}<br />
+      Grade: {{policier.grade | slice:2:20}}<br />
+      <button (click)="modifier_policier(i)">Modifier</button><button (click)="supprimer_policier(i)" >Supprimer</button>
+    </p>
+  </div>
+
+  <p>
+    <label>Prénom :
+      <input type="text" [(ngModel)]="prenom_policier">
+    </label>
+  </p>
+
+  <p>
+    <label>Nom :
+      <input type="text" [(ngModel)]="nom_policier">
+    </label>
+  </p>
+
+  <p>
+    <label>Grade :
+      <select [(ngModel)]="grade_policier">
+        <option value="1 GPX">GPX</option>
+        <option value="2 Bier">Bier</option>
+        <option value="3 Bier Chef">Bier Chef</option>
+        <option value="4 Major">Major</option>
+        <option value="5 Lieutenant">Lieutenant</option>
+        <option value="6 Capitaine">Capitaine</option>
+        <option value="7 Commandant">Commandant</option>
+      </select>
+    </label>
+  </p>
+
+  <button (click)="ajouter_policier()">Ajouter un policier !</button>
+
+</fieldset>
+
+<fieldset>
+  <legend>appel</legend>
+
+  <p>
+    <label>Appelé par :
+      <select name="nom_appel" [(ngModel)]="appel.appelant">
+        <option value="TNF">TNF</option>
+        <option value="Requérant">Requérant</option>
+        <option value="Pompiers">Pompiers</option>
+        <option value="VHF">VHF</option>
+        <option value="Ronde">Ronde</option>
+      </select>
+    </label>
+
+    <label>à
+      <input type="time" [(ngModel)]="appel.heure">
+    </label>
+  </p>
+
+  <p>
+    <label>Situé à :
+      <input type="text" [(ngModel)]="appel.lieu">
+    </label>
+  </p>
+
+  <p>
+    <label>Nombre de personnes à l'eau signalées :
+      <input type="number" min="1" [(ngModel)]="appel.nb_baigneurs">
+    </label>
+  </p>
+
+  <p>
+    <label>Nom de la vedette :
+      <input type="text" [(ngModel)]="appel.nom_vedette">
+    </label>
+  </p>
+
+
+</fieldset>
+
+<fieldset>
+  <legend>sur place</legend>
+  <p>
+    <label>Heure d'interpellation :
+      <input type="time" [(ngModel)]="surplace.heure">
+    </label>
+  </p>
+
+  <p>
+    <label>Situé à :
+      <input type="text" [(ngModel)]="surplace.lieu">
+    </label>
+  </p>
+
+  <p>
+    <label>Nombre de personnes à l'eau interpellées :
+      <input type="number" min="1" [(ngModel)]="surplace.nb_baigneurs">
+    </label>
+  </p>
+
+</fieldset>
+
+<fieldset>
+  <legend>interpellés</legend>
+
+  <div *ngFor="let interpel of interpels; index as i">
+    <p>
+      Interpellé : {{i+1}}<br />
+      Type de document : {{interpel.type_doc | slice:3:20 }}<br />
+      Nom : {{interpel.nom}}<br />
+      Prénom : {{interpel.prenom}}<br />
+      Date de naissance : {{interpel.date_naissance}}<br />
+      Lieu de naissance : {{interpel.lieu_naissance}}<br />
+      Téléphone : {{interpel.tel}}<br />
+      Adresse : {{interpel.adresse}}<br />
+      Ville : {{interpel.ville}}<br />
+      Code Postal : {{interpel.code_postal}}<br />
+      Recherché : {{interpel.recherche}}<br />
+      <button (click)="supprimer_interpel(i)">Supprimer</button> <button (click)="modifier_interpel(i)">Modifier</button>
+    </p>
+  </div>
+
+
+
+
+  <p>
+    <label>Type de document :
+      <select  [(ngModel)]="type_doc_interpel">
+        <option value="sa  carte d'identité">Carte d'identité</option>
+        <option value="son passeport">Passeport</option>
+        <option value="son permis">Permis</option>
+        <option value="sa  carte vitale">Carte vitale</option>
+        <option value="son identité verbale">Identité verbale</option>
+      </select>
+    </label>
+  </p>
+
+  <p>
+    <label>Nom :
+      <input type="text" value="" [(ngModel)]="nom_interpel">
+    </label>
+  </p>
+
+  <p>
+    <label>Prénom :
+      <input type="text" value="" [(ngModel)]="prenom_interpel">
+    </label>
+  </p>
+
+  <p>
+    <label>Date de naissance :
+      <input type="date" [(ngModel)]="date_naissance_interpel">
+    </label>
+  </p>
+
+  <p>
+    <label>Lieu de naissance :
+      <input type="text" value="" [(ngModel)]="lieu_naissance_interpel">
+    </label>
+  </p>
+
+  <p>
+    <label>Téléphone :
+      <input type="tel" value="" [(ngModel)]="tel_interpel" >
+    </label>
+  </p>
+
+  <p>
+    <label>Adresse :
+      <input type="text" value="" [(ngModel)]="adresse_interpel">
+    </label>
+  </p>
+
+  <p>
+    <label>Ville :
+      <input type="text" value="" [(ngModel)]="ville_interpel">
+    </label>
+  </p>
+
+  <p>
+    <label>Code Postal :
+      <input type="text" value="" [(ngModel)]="code_interpel">
+    </label>
+  </p>
+
+  <p>Recherché ?
+    <label>Oui
+      <input type="radio" name="recherche" value="true" (click)="test_recherche(true)" [(ngModel)]="recherche_interpel">
+    </label>
+    <label>Non
+      <input type="radio" name="recherche" value="false" (click)="test_recherche(false)" [(ngModel)]="recherche_interpel">
+    </label>
+    <span *ngIf="recherche"><br />Information complementaire : <textarea></textarea></span>
+  </p>
+
+  <button (click)="ajouter_interpel()">Ajouter !</button>
+
+
+
+</fieldset>
+
+
+<table border="1" cellpadding="10">
+
+        <tr>
+          <td style="text-align:center;" width="15%">
+            <p>DESTINATAIRE</p>
+            <p>TRIBUNAL DE POLICE<br /> DE PARIS</p>
+          </td>
+          <td width="70%" >
+
+          </td>
+          <td style="text-align:center;"width="15%">
+            <p>RESERVE AU PARQUET</p>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top" style="text-align:center;font-size:13px;">
+            <p><b>REPUBLIQUE FRANCAISE<br />MINISTERE DE L'INTERIEUR</b></p>
+            <p><b>DIRECTION GENERALE<br /> DE LA POLICE NATIONALE</b></p>
+            <hr width="50%"/>
+            <p><b>S.D.U.S.S.O-S.U.O-Brigade Fluviale</b></p>
+            <hr width="50%"/>
+            <p>PV : {{ date | date: 'yyyy'}} / __ / 001</p>
+          </td>
+          <td colspan="2">
+            <h1 style="margin-left : 60px;">PROCES VERBAL</h1>
+
+
+
+            <p>En {{ date | date: 'yyyy'}} ,</p>
+            <p>Le {{ date | date: 'dd/MM'}} à {{ date | date: 'H'}} heures et {{ date | date: 'mm'}} minutes</p>
+
+            <p>Nous,</p>
+            <p>test : {{ policiers | orderBy: 'grade'}}</p>
+
+            <div *ngFor="let policier of policiers ; index as i">
+            <p>{{ policier.prenom }} {{ policier.nom}} {{ policier.grade }}</p></div>
+            <p>Gardien de la paix en fonction à la brigade fluviale de PARIS</p>
+
+            <p>Agent de Police Judiciaire en résidence à PARIS</p>
+            <p>Étant au service</p>
+            <p>Agissant conformément aux instructions reçus de madame BERJOT Sandrine, Commandant de Police, Officier de Police Judiciaire territorialement compétent, Chef du Service de la Brigade Fluviale de Paris.</p>
+            <p>Sommes requis par notre station directrice « {{ appel.appelant }} » à {{ appel.heure | date: "H" }} heures {{ appel.heure | date: "mm" }} minutes pour {{ appel.nb_baigneurs }} baigneurs en Seine {{appel.lieu}}.</p>
+            <p>Sous les ordres de ---nom_chef-- --prenom_chef--- et assisté des Gardiens de la Paix du service.</p>
+
+            <p>Revêtus de nos tenues d’uniformes réglementaires et insignes apparents à notre fonction.</p>
+            <p>Nous transportons sur place  à bord de la vedette « {{appel.nom_vedette}} » où étant à {{ surplace.heure | date: "H" }} heures {{ surplace.heure | date: "mm" }} minutes a {{surplace.lieu}}, sommes en présence de {{surplace.nb_baigneurs}} individus mouillés.</p>
+            <p>Mettons pied à terre et prenons contact avec le ou les individus qui nous déclarent s'être jetés à l’eau volontairement.</p>
+            <p>Palpé les individus ne sont trouvés porteur d’aucun objet dangereux pour eux ou pour autrui.</p>
+
+            <div *ngFor="let interpel of interpels; index as i">
+              <p>
+                Le {{i+1}}e individus nous présente {{interpel.type_doc}} supportant sa photographie au nom de {{interpel.nom}} {{interpel.prenom}} né le {{interpel.date_naissance}} à {{interpel.lieu_naissance}} demeurant {{interpel.adresse}}, {{interpel.ville}} {{interpel.code_postal}} Téléphone: {{interpel.tel}}
+              </p>
+            </div>
+
+            <p>Prévue par l’odonnace du préfet de Police du 17 avril 1923 et réprimée par l’article R610-5 du Code Pénal, Infraction de classe 1, Natif 6032.</p>
+            <p>Quittons les lieux sans incident.</p>
+            <p>Dont Procès verbal que signent avec nous nos assistants.</p>
+          </td>
+        </tr>
+      </table>
